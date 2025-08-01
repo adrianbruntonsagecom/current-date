@@ -1,3 +1,14 @@
+<!-- Input for dynamic title -->
+<label for="titleInput">Add your title with all the styles you want:  </label>
+<input
+  id="titleInput"
+  [(ngModel)]="dynamicTitle"
+  (input)="onInputChange()"
+  placeholder="Enter a title..."
+/>
+
+<h1 id="myTitle" #myTitle></h1>
+
 <div *ngIf="!isLoading">
   <div *ngIf="errorMessage">
     <span class="error">{{ errorMessage }}</span>
@@ -6,9 +17,11 @@
     <span class="date">{{ displayDate }}</span>
   </div>
 </div>
+<br />
 
 <div *ngIf="isLoading">
   <app-loader></app-loader>
 </div>
 
 <button (click)="updateDate()">Update</button>
+<br/><br/><br/>
