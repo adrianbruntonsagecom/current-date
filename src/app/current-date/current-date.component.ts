@@ -1,14 +1,24 @@
-import { Component, Input, OnInit } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+  AfterViewInit,
+} from "@angular/core";
 import { CurrentDateService } from "./current-date.service";
 import { DateFormat } from "./current-date.types";
 
 @Component({
   selector: "app-current-date",
   templateUrl: "./current-date.component.html",
-  styleUrls: ["./current-date.component.css"],
+  styleUrls: ["./current-date.component.css"]
 })
-export class CurrentDateComponent implements OnInit {
+export class CurrentDateComponent implements AfterViewInit {
+  @ViewChild("myTitle") myTitle!: ElementRef;
+
   @Input() format: DateFormat = "medium";
+
+  dynamicTitle = "<b>This is my local date:</b>";
 
   isLoading = false;
   displayDate = "";
@@ -16,8 +26,19 @@ export class CurrentDateComponent implements OnInit {
 
   constructor(private currentDateService: CurrentDateService) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
     this.setDisplayDate();
+    this.updateTitleDisplay();
+  }
+
+  updateTitleDisplay() {
+    if (this.myTitle) {
+      this.myTitle.nativeElement.innerHTML = this.dynamicTitle;
+    }
+  }
+
+  onInputChange() {
+    this.updateTitleDisplay();
   }
 
   setDisplayDate() {
