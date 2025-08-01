@@ -18,7 +18,6 @@ export class CurrentDateComponent implements AfterViewInit {
 
   @Input() format: DateFormat = "medium";
 
-  // Title set by user input - XSS vulnerable example
   dynamicTitle = "<b>This is my local date:</b>";
 
   isLoading = false;
