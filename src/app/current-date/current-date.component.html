@@ -1,0 +1,14 @@
+<div *ngIf="!isLoading">
+  <div *ngIf="errorMessage">
+    <span class="error">{{ errorMessage }}</span>
+  </div>
+  <div *ngIf="displayDate">
+    <span class="date">{{ displayDate }}</span>
+  </div>
+</div>
+
+<div *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<button (click)="updateDate()">Update</button>
